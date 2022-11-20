@@ -47,6 +47,9 @@ while True:
         length = math.hypot(x2 - x1, y2 - y1)
         print(length)
 
+        if length < 30:
+            cv2.circle(img, (cx, cy), 6, (0, 0, 0), cv2.FILLED)
+
     # Calculating and printing the FPS in live video
     cTime = time.time()
     fps = 1 / (cTime - pTime)
