@@ -1,6 +1,7 @@
 import cv2
 import time
 import numpy as np
+import math
 import HandTrackingModule as htm
 
 # Setting camera width and height
@@ -25,10 +26,12 @@ while True:
 
     # Getting the value number 4 and 8 ---> 4 is the tip of thumb and 8 is the tip of index finger
     if len(landmarkList) != 0:
-        print(landmarkList[4], landmarkList[8])
 
         x1, y1 = landmarkList[4][1], landmarkList[4][2]
         x2, y2 = landmarkList[8][1], landmarkList[8][2]
+
+        # getting the centre point between the landmark 4 and 8
+        cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
 
         # Creating the circle around the 4 and 8 point
         cv2.circle(img, (x1, y1), 10, (255, 0, 0), cv2.FILLED)
@@ -36,6 +39,13 @@ while True:
 
         # Creating a line to join the two circles
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 255), 4)
+
+        # Circling the middle point between landmark 4 and 8
+        cv2.circle(img, (cx, cy), 6, (255, 255, 0), cv2.FILLED)
+
+        # Finding the length of the line between landmark 4 and 8
+        length = math.hypot(x2 - x1, y2 - y1)
+        print(length)
 
     # Calculating and printing the FPS in live video
     cTime = time.time()
