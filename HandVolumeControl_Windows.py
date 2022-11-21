@@ -24,11 +24,13 @@ detector = htm.HandDetector(detectionCon=0.65)
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 volume = cast(interface, POINTER(IAudioEndpointVolume))
-
 # volume.GetMute()
 # volume.GetMasterVolumeLevel()
-print(volume.GetVolumeRange())
-volume.SetMasterVolumeLevel(-20.0, None)
+
+volRange = volume.GetVolumeRange()
+volume.SetMasterVolumeLevel(0, None)
+minVol = volRange[0]
+maxVol = volRange[1]
 
 
 while True:
@@ -61,7 +63,16 @@ while True:
 
         # Finding the length of the line between landmark 4 and 8
         length = math.hypot(x2 - x1, y2 - y1)
-        print(length)
+        # print(length)
+
+        # Hand Range 32 ~ 300
+        # Volume Range -65 ~ 0
+
+        vol = np.interp(length, [32, 300], [minVol, maxVol])
+        print(length, vol)
+
+        # Executing the volume according to the finger index length
+        volume.SetMasterVolumeLevel(vol, None)
 
         if length < 32:
             cv2.circle(img, (cx, cy), 6, (0, 0, 0), cv2.FILLED)
