@@ -20,6 +20,8 @@ detector = htm.HandDetector(detectionCon=0.65)
 # Volume settings on Mac
 minVol = 0
 maxVol = 100
+vol = 0
+volBar = 400
 
 while True:
     success, img = cap.read()
@@ -57,7 +59,8 @@ while True:
         # Volume Range 0 ~ 100
 
         vol = np.interp(length, [32, 300], [minVol, maxVol])
-        print(length, vol)
+        volBar = np.interp(length, [32, 300], [400, 150])
+        # print(length, vol)
 
         # Executing the volume according to the finger index length
         vol = "set volume output volume " + str(vol)
@@ -65,6 +68,10 @@ while True:
 
         if length < 32:
             cv2.circle(img, (cx, cy), 6, (0, 0, 0), cv2.FILLED)
+
+    # Creating a Volume bar on the screen
+    cv2.rectangle(img, (50, 150), (85, 400), (0, 255, 0), 3)
+    cv2.rectangle(img, (50, int(volBar)), (85, 400), (0, 255, 0), cv2.FILLED)
 
     # Calculating and printing the FPS in live video
     cTime = time.time()
