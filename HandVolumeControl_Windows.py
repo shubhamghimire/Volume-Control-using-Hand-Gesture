@@ -31,6 +31,8 @@ volRange = volume.GetVolumeRange()
 volume.SetMasterVolumeLevel(0, None)
 minVol = volRange[0]
 maxVol = volRange[1]
+vol = 0
+volBar = 400
 
 
 while True:
@@ -67,15 +69,19 @@ while True:
 
         # Hand Range 32 ~ 300
         # Volume Range -65 ~ 0
-
         vol = np.interp(length, [32, 300], [minVol, maxVol])
-        print(length, vol)
+        volBar = np.interp(length, [32, 300], [400, 150])
+        # print(length, vol)
 
         # Executing the volume according to the finger index length
         volume.SetMasterVolumeLevel(vol, None)
 
         if length < 32:
             cv2.circle(img, (cx, cy), 6, (0, 0, 0), cv2.FILLED)
+
+    # Creating a Volume bar on the screen
+    cv2.rectangle(img, (50, 150), (85, 400), (0, 255, 0), 3)
+    cv2.rectangle(img, (50, int(volBar)), (85, 400), (0, 255, 0), cv2.FILLED)
 
     # Calculating and printing the FPS in live video
     cTime = time.time()
