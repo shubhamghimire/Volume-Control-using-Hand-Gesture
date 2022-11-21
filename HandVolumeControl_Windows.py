@@ -4,6 +4,11 @@ import numpy as np
 import math
 import HandTrackingModule as htm
 
+# Volume control library imports
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+
 # Setting camera width and height
 widthCam, heightCam = 640, 480
 
@@ -14,6 +19,17 @@ pTime = 0
 
 # Initializing the object of hand tracking module class
 detector = htm.HandDetector(detectionCon=0.65)
+
+
+devices = AudioUtilities.GetSpeakers()
+interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+volume = cast(interface, POINTER(IAudioEndpointVolume))
+
+# volume.GetMute()
+# volume.GetMasterVolumeLevel()
+print(volume.GetVolumeRange())
+volume.SetMasterVolumeLevel(-20.0, None)
+
 
 while True:
     success, img = cap.read()
@@ -47,7 +63,7 @@ while True:
         length = math.hypot(x2 - x1, y2 - y1)
         print(length)
 
-        if length < 30:
+        if length < 32:
             cv2.circle(img, (cx, cy), 6, (0, 0, 0), cv2.FILLED)
 
     # Calculating and printing the FPS in live video

@@ -3,6 +3,8 @@ import time
 import numpy as np
 import math
 import HandTrackingModule as htm
+import osascript
+
 
 # Setting camera width and height
 widthCam, heightCam = 640, 480
@@ -14,6 +16,10 @@ pTime = 0
 
 # Initializing the object of hand tracking module class
 detector = htm.HandDetector(detectionCon=0.65)
+
+# Volume settings on Mac
+minVol = 0
+maxVol = 100
 
 while True:
     success, img = cap.read()
@@ -45,7 +51,17 @@ while True:
 
         # Finding the length of the line between landmark 4 and 8
         length = math.hypot(x2 - x1, y2 - y1)
-        print(length)
+        # print(length)
+
+        # Hand Range 32 ~ 300
+        # Volume Range 0 ~ 100
+
+        vol = np.interp(length, [32, 300], [minVol, maxVol])
+        print(length, vol)
+
+        # Executing the volume according to the finger index length
+        vol = "set volume output volume " + str(vol)
+        osascript.osascript(vol)
 
         if length < 32:
             cv2.circle(img, (cx, cy), 6, (0, 0, 0), cv2.FILLED)
