@@ -16,7 +16,7 @@ Using this Python program we can control the volume of mac, linux and windows PC
 
 - I have used google's mediapipe hand lanmark model from which we can get landmark points of hands.
 
-    - Mediapipe Hand Landmark Model [https://google.github.io/mediapipe/solutions/hands.html]
+    - Mediapipe Hand Landmark Model
 
     - ![alt text](Images/hand_landmarks_points_definition.png)
 
@@ -41,6 +41,8 @@ Using this Python program we can control the volume of mac, linux and windows PC
       ![alt text](Images/Volume-Control-Line.png)
     
     - Real time volume control video
+      https://user-images.githubusercontent.com/8254870/203577758-ed277d6d-6d8d-47f1-aaeb-d70a82ce12dd.mp4
+
 
 
 ## References
