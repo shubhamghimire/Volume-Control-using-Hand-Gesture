@@ -35,13 +35,15 @@ Using this Python program we can control the volume of mac, linux and windows PC
 -  Some images from running the program.
 
     - Drawing Hand Landmarks on real time.
+    
       ![alt text](Images/Hands-Landmarks-Drawn.png)
     
     - Volume Control using hand gesture on real time.
-      ![alt text](Images/Volume-Control-Line.png)
+
+      ![alt text](Images/volume-control-image.png)
     
     - Real time volume control video
-      https://user-images.githubusercontent.com/8254870/203577758-ed277d6d-6d8d-47f1-aaeb-d70a82ce12dd.mp4
+      - https://user-images.githubusercontent.com/8254870/203577758-ed277d6d-6d8d-47f1-aaeb-d70a82ce12dd.mp4
 
 
 
