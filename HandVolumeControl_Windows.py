@@ -69,9 +69,9 @@ while True:
 
         # Hand Range 32 ~ 300
         # Volume Range -65 ~ 0
-        vol = np.interp(length, [32, 280], [minVol, maxVol])
-        volBar = np.interp(length, [32, 280], [400, 150])
-        volPer = np.interp(length, [32, 280], [0, 100])
+        vol = np.interp(length, [32, 250], [minVol, maxVol])
+        volBar = np.interp(length, [32, 250], [400, 150])
+        volPer = np.interp(length, [32, 250], [0, 100])
         # print(length, vol)
 
         # Executing the volume according to the finger index length

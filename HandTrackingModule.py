@@ -23,6 +23,7 @@ class HandDetector:
         )
         self.mpDraw = mp.solutions.drawing_utils
 
+    # Detecting hands on the video
     def findHands(self, img, draw=True):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.hands.process(imgRGB)
@@ -38,6 +39,7 @@ class HandDetector:
 
         return img
 
+    # Returning the hand landmarks
     def findPosition(self, img, handNo=0, draw=True):
 
         landmarkList = []
@@ -51,7 +53,7 @@ class HandDetector:
                 h, w, c = img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 landmarkList.append([id, cx, cy])
-                print(id, cx, cy)
+                # print(id, cx, cy)
                 if len(landmarkList) != 0:
                     if draw:
                         cv2.circle(img, (cx, cy), 10, (255, 0, 255), cv2.FILLED)
